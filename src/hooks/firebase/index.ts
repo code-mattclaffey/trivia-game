@@ -4,38 +4,35 @@ import { useEffect, useState } from "react";
 import firebaseConfig from "./config";
 export const useFirebase = () => {
   const [app, setFirebaseInstance] = useState<{ apps: Array<any> }>();
+
+  // Lazy initializer
   const [data, setData] = useState<{ test: string }>();
+
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<boolean>(false);
+  const [error] = useState<boolean>(false);
+
+  useEffect(() => {
+    const storage = localStorage.getItem("trivia-state");
+
+    if (storage) {
+      setData(JSON.parse(storage));
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     if (!app?.apps.length) {
       firebase.initializeApp(firebaseConfig);
 
       setFirebaseInstance(firebase);
-      // the ref could be the idea of the game
-      firebase
-        .database()
-        .ref("trivia")
-        .set({
-          test: "MEEEE",
-        })
-        .then(() => {
-          setData({
-            test: "MEEEE",
-          });
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error(error);
-          setError(true);
-        });
 
       firebase
         .database()
         .ref("trivia")
         .on("value", (snapshot) => {
           setData(snapshot.val());
+          localStorage.setItem("trivia-state", JSON.stringify(snapshot.val()));
+          setLoading(false);
         });
     }
   }, [app]);
