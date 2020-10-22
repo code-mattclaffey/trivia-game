@@ -1,9 +1,13 @@
 import Layout from "../../components/Layout";
+import FirebaseWrapper from "../../components/firebase-wrapper";
+import CreateGame from "../../components/create-game";
 
 const IndexPage = () => (
-  <Layout title="Create">
-    <h1>Create</h1>
-  </Layout>
+  <FirebaseWrapper>
+    <Layout title="Create">
+      <CreateGame />
+    </Layout>
+  </FirebaseWrapper>
 );
 
 export default IndexPage;

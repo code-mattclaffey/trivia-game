@@ -16,9 +16,11 @@ interface ScoreBoard {
 }
 
 interface OpenTbdApi {
-  category: string;
-  type: "multiple" | "true/false";
-  difficulty: "easy" | "medium" | "hard";
+  token: string;
+  amount: number;
+  category?: string;
+  type?: "multiple" | "true/false";
+  difficulty?: "easy" | "medium" | "hard";
 }
 
 interface Question extends OpenTbdApi {
@@ -38,7 +40,7 @@ interface Game {
   status: keyof typeof GameStatuses; // to change state of page when status changes
   currentQuestionId: string;
   questionStage: number; // to determine which question the user is on
-  questions?: Array<Question>;
+  questions: Array<Question>;
   players?: Array<Player>;
 }
 
