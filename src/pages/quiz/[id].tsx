@@ -10,8 +10,8 @@ const IndexPage: React.FC = () => {
 
   return (
     <FirebaseWrapper gameId={gameId}>
-      <Layout title="Host">
-        <h1>Host</h1>
+      <Layout title="Quiz">
+        <h1>Quiz</h1>
       </Layout>
     </FirebaseWrapper>
   );

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import firebase from "firebase/app";
 import "firebase/database";
 import firebaseConfig from "../components/firebase-wrapper/config";
+import "../styles/global.css";
 
 const App = ({ Component, pageProps }: any) => {
   const [app, setFirebaseInstance] = useState<{ apps: Array<any> }>();

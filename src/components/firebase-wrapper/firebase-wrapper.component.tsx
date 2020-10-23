@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 
 interface FirebaseWrapperContextProps extends Game {
   createGame: (questions: Array<Question>) => void;
+  addPlayer: (player: Player) => void;
 }
 
 export const defaultGameState: Game = {
@@ -20,6 +21,7 @@ export const defaultGameState: Game = {
 const contextState: FirebaseWrapperContextProps = {
   ...defaultGameState,
   createGame: () => null,
+  addPlayer: () => null,
 };
 
 export const FirebaseWrapperContext = createContext<
@@ -64,8 +66,6 @@ const FirebaseWrapper: React.FC<{ gameId?: string }> = ({
       id,
     };
 
-    console.log(newGameState);
-
     firebase
       .database()
       .ref(id)
@@ -80,9 +80,37 @@ const FirebaseWrapper: React.FC<{ gameId?: string }> = ({
       });
   };
 
+  const addPlayer = (player: Player) => {
+    const oldState = data;
+
+    const newGameState = {
+      ...oldState,
+    };
+
+    newGameState.players = newGameState.players || [];
+
+    newGameState.players.push(player);
+
+    console.log(newGameState);
+
+    firebase
+      .database()
+      .ref(gameId)
+      .set(newGameState)
+      .then(() => {
+        setData(newGameState);
+        localStorage.setItem("trivia-state", JSON.stringify(newGameState));
+        router.push(`/quiz/${gameId}`);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   const context = {
     ...data,
     createGame,
+    addPlayer,
   };
 
   return (
