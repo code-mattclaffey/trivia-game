@@ -1,9 +1,3 @@
-enum GameStatuses {
-  NOT_STARTED = "NOT_STARTED",
-  IN_PLAY = "IN_PLAY",
-  FINISHED = "FINISHED",
-}
-
 interface Player {
   playerId: string;
   name: string;
@@ -19,8 +13,8 @@ interface OpenTbdApi {
   token: string;
   amount: number;
   category?: string;
-  type?: "multiple" | "true/false";
-  difficulty?: "easy" | "medium" | "hard";
+  type?: "any" | "multiple" | "true/false";
+  difficulty?: "any" | "easy" | "medium" | "hard";
 }
 
 interface Question extends OpenTbdApi {
@@ -36,7 +30,7 @@ interface OpenTbdApiResponse {
 
 interface Game {
   gameId: string | null;
-  status: keyof typeof GameStatuses; // to change state of page when status changes
+  status: "NOT_STARTED" | "IN_PLAY" | "FINISHED";
   currentQuestionId: string;
   questionStage: number; // to determine which question the user is on
   questions: Array<Question>;

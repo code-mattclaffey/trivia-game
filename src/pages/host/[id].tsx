@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../../components/Layout";
 import FirebaseWrapper from "../../components/firebase-wrapper";
 import { useRouter } from "next/router";
+import HostPanel from "../../components/host";
 
 const IndexPage: React.FC = () => {
   const router = useRouter();
@@ -28,6 +29,7 @@ const IndexPage: React.FC = () => {
         <button onClick={() => onClick(`/join/${id}`)}>
           Share link with friends
         </button>
+        <HostPanel />
       </Layout>
     </FirebaseWrapper>
   );

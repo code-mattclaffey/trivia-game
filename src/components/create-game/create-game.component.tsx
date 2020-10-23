@@ -13,14 +13,25 @@ const buildTrivaUrl = ({
   return `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=${type}&category=${category}&token=${token}`;
 };
 
-const CreateGame = () => {
+const CreateGame: React.FC = () => {
   const { createGame } = useFirebaseWrapper();
 
-  const onSubmit = (values: OpenTbdApi) => {
+  const onSubmit = ({
+    amount = 10,
+    difficulty = "any",
+    type = "any",
+    category = "any",
+  }: OpenTbdApi) => {
     fetch("https://opentdb.com/api_token.php?command=request")
       .then((res) => res.json())
       .then(({ token }) => {
-        const apiUrl = buildTrivaUrl({ ...values, token });
+        const apiUrl = buildTrivaUrl({
+          amount,
+          difficulty,
+          type,
+          category,
+          token,
+        });
 
         fetch(apiUrl)
           .then((response) => response.json())

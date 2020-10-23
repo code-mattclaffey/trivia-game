@@ -3,7 +3,7 @@ import { useFirebaseWrapper } from "../firebase-wrapper/firebase-wrapper.compone
 import { withTypes, Field } from "react-final-form";
 import { v4 as uuidv4 } from "uuid";
 
-const JoinGame = () => {
+const JoinGame: React.FC = () => {
   const { addPlayer } = useFirebaseWrapper();
 
   const onSubmit = (values: Player) => {

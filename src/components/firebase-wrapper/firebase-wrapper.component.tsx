@@ -3,10 +3,12 @@ import firebase from "firebase/app";
 import "firebase/database";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/router";
+import { GameStatuses } from "../../types";
 
 interface FirebaseWrapperContextProps extends Game {
   createGame: (questions: Array<Question>) => void;
   addPlayer: (player: Player) => void;
+  updateStatus: (status: GameStatuses) => void;
 }
 
 export const defaultGameState: Game = {
@@ -22,6 +24,7 @@ const contextState: FirebaseWrapperContextProps = {
   ...defaultGameState,
   createGame: () => null,
   addPlayer: () => null,
+  updateStatus: () => null,
 };
 
 export const FirebaseWrapperContext = createContext<
@@ -61,7 +64,7 @@ const FirebaseWrapper: React.FC<{ gameId?: string }> = ({
     const id = uuidv4();
 
     const newGameState = {
-      ...data,
+      ...defaultGameState,
       questions,
       id,
     };
@@ -80,6 +83,25 @@ const FirebaseWrapper: React.FC<{ gameId?: string }> = ({
       });
   };
 
+  const updateStatus = (status: keyof typeof GameStatuses) => {
+    firebase
+      .database()
+      .ref(gameId)
+      .update({ status })
+      .then(() => {
+        const newGameState: Game = {
+          ...data,
+          status,
+        };
+
+        setData(newGameState);
+        localStorage.setItem("trivia-state", JSON.stringify(newGameState));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   const addPlayer = (player: Player) => {
     const oldState = data;
 
@@ -90,8 +112,6 @@ const FirebaseWrapper: React.FC<{ gameId?: string }> = ({
     newGameState.players = newGameState.players || [];
 
     newGameState.players.push(player);
-
-    console.log(newGameState);
 
     firebase
       .database()
@@ -111,6 +131,7 @@ const FirebaseWrapper: React.FC<{ gameId?: string }> = ({
     ...data,
     createGame,
     addPlayer,
+    updateStatus,
   };
 
   return (
