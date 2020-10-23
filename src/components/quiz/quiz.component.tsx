@@ -25,9 +25,7 @@ const Quiz: React.FC = () => {
     return answers;
   };
 
-  const [answers, setAnswers] = useState(() =>
-    randomiseAnswers(questions[questionStage])
-  );
+  const [answers, setAnswers] = useState<string[]>([]);
 
   useEffect(() => {
     const question: Question = questions[questionStage];
