@@ -9,6 +9,8 @@ interface FirebaseWrapperContextProps extends Game {
   createGame: (questions: Array<Question>) => void;
   addPlayer: (player: Player) => void;
   updateStatus: (status: GameStatuses) => void;
+  nextQuestion: () => void;
+  updatePlayerScore: (player: Player) => void;
 }
 
 export const defaultGameState: Game = {
@@ -25,6 +27,8 @@ const contextState: FirebaseWrapperContextProps = {
   createGame: () => null,
   addPlayer: () => null,
   updateStatus: () => null,
+  nextQuestion: () => null,
+  updatePlayerScore: () => null,
 };
 
 export const FirebaseWrapperContext = createContext<
@@ -102,6 +106,54 @@ const FirebaseWrapper: React.FC<{ gameId?: string }> = ({
       });
   };
 
+  const nextQuestion = () => {
+    firebase
+      .database()
+      .ref(gameId)
+      .update({ questionStage: data.questionStage + 1 })
+      .then(() => {
+        const newGameState: Game = {
+          ...data,
+          questionStage: data.questionStage + 1,
+        };
+
+        setData(newGameState);
+        localStorage.setItem("trivia-state", JSON.stringify(newGameState));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const updatePlayerScore = (player: Player) => {
+    const players = data.players;
+
+    players?.map((currentPlayer) => {
+      if (currentPlayer.playerId === player.playerId) {
+        return player;
+      }
+
+      return currentPlayer;
+    });
+
+    firebase
+      .database()
+      .ref(gameId)
+      .update({ players })
+      .then(() => {
+        const newGameState: Game = {
+          ...data,
+          players,
+        };
+
+        setData(newGameState);
+        localStorage.setItem("trivia-state", JSON.stringify(newGameState));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   const addPlayer = (player: Player) => {
     const oldState = data;
 
@@ -132,6 +184,8 @@ const FirebaseWrapper: React.FC<{ gameId?: string }> = ({
     createGame,
     addPlayer,
     updateStatus,
+    nextQuestion,
+    updatePlayerScore,
   };
 
   return (
