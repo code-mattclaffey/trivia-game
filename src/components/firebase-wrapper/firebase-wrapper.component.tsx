@@ -9,7 +9,7 @@ interface FirebaseWrapperContextProps extends Game {
 }
 
 export const defaultGameState: Game = {
-  id: "",
+  gameId: null,
   status: "NOT_STARTED",
   currentQuestionId: "",
   questionStage: 0,
@@ -28,7 +28,7 @@ export const FirebaseWrapperContext = createContext<
 
 export const useFirebaseWrapper = () => useContext(FirebaseWrapperContext);
 
-const FirebaseWrapper: React.FC<{ gameId?: string | string[] }> = ({
+const FirebaseWrapper: React.FC<{ gameId?: string }> = ({
   children,
   gameId,
 }) => {
@@ -45,11 +45,9 @@ const FirebaseWrapper: React.FC<{ gameId?: string | string[] }> = ({
 
   useEffect(() => {
     if (gameId !== undefined) {
-      const id: any = gameId;
-
       firebase
         .database()
-        .ref(id)
+        .ref(gameId)
         .on("value", (snapshot) => {
           setData(snapshot.val());
           localStorage.setItem("trivia-state", JSON.stringify(snapshot.val()));

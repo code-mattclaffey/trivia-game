@@ -5,7 +5,7 @@ enum GameStatuses {
 }
 
 interface Player {
-  id: string;
+  playerId: string;
   name: string;
   correctAnswers: number;
   incorrectAnswers: number;
@@ -24,7 +24,6 @@ interface OpenTbdApi {
 }
 
 interface Question extends OpenTbdApi {
-  id: string;
   question: string;
   correct_answer: string;
   incorrect_answers: Array<string>;
@@ -36,7 +35,7 @@ interface OpenTbdApiResponse {
 }
 
 interface Game {
-  id: string;
+  gameId: string | null;
   status: keyof typeof GameStatuses; // to change state of page when status changes
   currentQuestionId: string;
   questionStage: number; // to determine which question the user is on
