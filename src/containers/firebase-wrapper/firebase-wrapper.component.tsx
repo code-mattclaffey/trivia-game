@@ -42,24 +42,24 @@ const FirebaseWrapper: React.FC<{ gameId?: string }> = ({
 }) => {
   const KEY = "trivia-state";
   const router = useRouter();
-  const [data, setData] = useState<Game>(defaultGameState);
 
-  useEffect(() => {
+  const [data, setData] = useState<Game>(() => {
+    if (!process.browser) return defaultGameState;
+
     const storage = localStorage.getItem("trivia-state");
 
     if (storage) {
-      setData(JSON.parse(storage));
+      return JSON.parse(storage);
     }
-  }, []);
+
+    return defaultGameState;
+  });
 
   useEffect(() => {
     if (gameId !== undefined) {
-      firebase
-        .database()
-        .ref(gameId)
-        .on("value", (snapshot) => {
-          updateState(snapshot.val());
-        });
+      getGameRef(gameId).on("value", (snapshot) => {
+        updateState(snapshot.val());
+      });
     }
   }, [gameId]);
 
@@ -170,6 +170,8 @@ const FirebaseWrapper: React.FC<{ gameId?: string }> = ({
     nextQuestion,
     updatePlayerScore,
   };
+
+  console.log(data);
 
   return (
     <FirebaseWrapperContext.Provider value={context}>
