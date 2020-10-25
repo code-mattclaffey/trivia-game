@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../../components/Layout";
-import FirebaseWrapper from "../../components/firebase-wrapper";
+import FirebaseWrapper from "../../containers/firebase-wrapper";
 import { useRouter } from "next/router";
 import HostPanel from "../../components/host";
 import { i18n } from "../../locales";

@@ -1,5 +1,5 @@
 import React from "react";
-import { useFirebaseWrapper } from "../firebase-wrapper/firebase-wrapper.component";
+import { useFirebaseWrapper } from "../../containers/firebase-wrapper/firebase-wrapper.component";
 import { withTypes, Field } from "react-final-form";
 import { categories, difficulties, types } from "./form-values";
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import firebase from "firebase/app";
 import "firebase/database";
-import firebaseConfig from "../components/firebase-wrapper/config";
+import firebaseConfig from "../containers/firebase-wrapper/config";
 import "../styles/global.css";
 
 const App = ({ Component, pageProps }: any) => {

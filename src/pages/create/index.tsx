@@ -1,5 +1,5 @@
 import Layout from "../../components/Layout";
-import FirebaseWrapper from "../../components/firebase-wrapper";
+import FirebaseWrapper from "../../containers/firebase-wrapper";
 import CreateGame from "../../components/create-game";
 
 const IndexPage = () => (

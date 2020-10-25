@@ -1,5 +1,5 @@
 import Layout from "../../components/Layout";
-import FirebaseWrapper from "../../components/firebase-wrapper";
+import FirebaseWrapper from "../../containers/firebase-wrapper";
 import { useRouter } from "next/router";
 import Quiz from "../../components/quiz";
 

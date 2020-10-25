@@ -1,5 +1,5 @@
 import React from "react";
-import { useFirebaseWrapper } from "../firebase-wrapper/firebase-wrapper.component";
+import { useFirebaseWrapper } from "../../containers/firebase-wrapper/firebase-wrapper.component";
 
 const Scoreboard: React.FC = () => {
   const { players } = useFirebaseWrapper();

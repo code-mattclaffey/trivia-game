@@ -1,5 +1,5 @@
 import React from "react";
-import { useFirebaseWrapper } from "../firebase-wrapper/firebase-wrapper.component";
+import { useFirebaseWrapper } from "../../containers/firebase-wrapper/firebase-wrapper.component";
 import { GameStatuses } from "../../types";
 import Scoreboard from "../scoreboard";
 import ShareLink from "../share-link";

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactHtmlParser from "react-html-parser";
-import { useFirebaseWrapper } from "../firebase-wrapper/firebase-wrapper.component";
+import { useFirebaseWrapper } from "../../containers/firebase-wrapper/firebase-wrapper.component";
 import { GameStatuses } from "../../types";
 import Scoreboard from "../scoreboard";
 import Button from "../button";
