@@ -3,8 +3,13 @@ import { useFirebaseWrapper } from "../../containers/firebase-wrapper/firebase-w
 import { withTypes, Field } from "react-final-form";
 import { v4 as uuidv4 } from "uuid";
 import Button from "../button";
+import { I18nProps } from "../../locales/en";
 
-const JoinGame: React.FC = () => {
+interface JoinGameProps {
+  i18n: I18nProps;
+}
+
+const JoinGame: React.FC<JoinGameProps> = ({ i18n }) => {
   const { addPlayer } = useFirebaseWrapper();
   const playerId = uuidv4();
 
@@ -28,7 +33,7 @@ const JoinGame: React.FC = () => {
         return (
           <form onSubmit={handleSubmit}>
             <fieldset>
-              <legend>Join game</legend>
+              <legend>{i18n.joinGameTitle}</legend>
               <Field
                 id="playerId"
                 name="playerId"
@@ -48,15 +53,15 @@ const JoinGame: React.FC = () => {
                 type="hidden"
               />
 
-              <label htmlFor="name">Player name</label>
+              <label htmlFor="name">{i18n.playerNameLabel}</label>
               <Field
                 id="name"
                 name="name"
                 component="input"
                 type="text"
-                placeholder="Player name"
+                placeholder={i18n.playerNamePlaceholder}
               />
-              <Button type="submit">Play game</Button>
+              <Button type="submit">{i18n.playGameCta}</Button>
             </fieldset>
           </form>
         );

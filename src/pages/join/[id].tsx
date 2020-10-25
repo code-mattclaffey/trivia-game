@@ -2,6 +2,7 @@ import Layout from "../../components/Layout";
 import FirebaseWrapper from "../../containers/firebase-wrapper";
 import { useRouter } from "next/router";
 import JoinGame from "../../components/join-game";
+import { i18n } from "../../locales";
 
 const IndexPage: React.FC = () => {
   const router = useRouter();
@@ -11,7 +12,7 @@ const IndexPage: React.FC = () => {
   return (
     <FirebaseWrapper gameId={gameId}>
       <Layout title="Join game">
-        <JoinGame />
+        <JoinGame i18n={i18n} />
       </Layout>
     </FirebaseWrapper>
   );
