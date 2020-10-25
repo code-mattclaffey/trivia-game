@@ -43,9 +43,10 @@ const HostPanel: React.FC<HostPanelProps> = ({ i18n }) => {
           <Button onClick={startGame}>{i18n.startGameCta}</Button>
         </>
       )}
-      {questionStage !== questions.length - 1 && (
-        <Button onClick={nextQuestion}>{i18n.nextQuestionCta}</Button>
-      )}
+      {questionStage !== questions.length - 1 &&
+        status === GameStatuses.IN_PLAY && (
+          <Button onClick={nextQuestion}>{i18n.nextQuestionCta}</Button>
+        )}
       {questionStage === questions.length - 1 && (
         <Button onClick={showWinner}>{i18n.showWinnerCta}</Button>
       )}

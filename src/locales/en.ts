@@ -11,7 +11,7 @@ const i18n: I18nProps = {
   shareLinkText: "Share link with friends",
   showWinnerCta: "Show winner",
   startGameCta: "Start game",
-  nextQuestionCta: "Start game",
+  nextQuestionCta: "Next question",
 };
 
 export default i18n;
