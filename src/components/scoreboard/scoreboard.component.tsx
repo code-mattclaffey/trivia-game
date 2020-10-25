@@ -9,13 +9,13 @@ const Scoreboard: React.FC = () => {
       {players
         ?.sort((a, b) => b.correctAnswers - a.correctAnswers)
         .map((player: Player) => (
-          <>
+          <div key={player.playerId}>
             <p>{player.name}</p>
             <p>
               Correct: {player.correctAnswers} Incorrect:{" "}
               {player.incorrectAnswers}
             </p>
-          </>
+          </div>
         ))}
     </>
   );

@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import ReactHtmlParser from "react-html-parser";
 import { useFirebaseWrapper } from "../../containers/firebase-wrapper/firebase-wrapper.component";
 import { GameStatuses } from "../../types";
-import Scoreboard from "../scoreboard";
 import Button from "../button";
+import Giphy from "../giphy";
+import { i18n } from "../../locales";
 
 const Quiz: React.FC = () => {
   const [playerId, setPlayerId] = useState<string>();
@@ -66,17 +67,29 @@ const Quiz: React.FC = () => {
   };
 
   if (status === GameStatuses.NOT_STARTED) {
-    return <p>Waiting for host to start the game...</p>;
+    return <p>{i18n.waitingToPlay}</p>;
   }
 
   if (status === GameStatuses.FINISHED) {
-    return <Scoreboard />;
+    const isWinner =
+      players?.sort((a, b) => b.correctAnswers - a.correctAnswers)[0]
+        .playerId === playerId;
+
+    return (
+      <Giphy
+        isWinner={isWinner}
+        i18n={{
+          winnerText: i18n.winnerText,
+          loserText: i18n.loserText,
+        }}
+      />
+    );
   }
 
   const question: Question = questions[questionStage];
 
   if (!question || !playerId) {
-    return <p>Error</p>;
+    return null;
   }
 
   return (

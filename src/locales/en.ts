@@ -22,6 +22,9 @@ export interface I18nProps {
     quiz: string;
     home: string;
   };
+  winnerText: string;
+  loserText: string;
+  waitingToPlay: string;
 }
 
 const i18n: I18nProps = {
@@ -48,6 +51,9 @@ const i18n: I18nProps = {
     quiz: "Trivia - Quiz",
     home: "Trivia - Quiz Game",
   },
+  winnerText: "You're the winner",
+  loserText: "You're the loser",
+  waitingToPlay: "Waiting for host to start the game...",
 };
 
 export default i18n;

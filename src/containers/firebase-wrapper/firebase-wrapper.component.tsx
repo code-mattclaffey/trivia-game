@@ -171,8 +171,6 @@ const FirebaseWrapper: React.FC<{ gameId?: string }> = ({
     updatePlayerScore,
   };
 
-  console.log(data);
-
   return (
     <FirebaseWrapperContext.Provider value={context}>
       {children}
