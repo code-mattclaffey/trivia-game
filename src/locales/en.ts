@@ -25,6 +25,7 @@ export interface I18nProps {
   winnerText: string;
   loserText: string;
   waitingToPlay: string;
+  playAgain: string;
 }
 
 const i18n: I18nProps = {
@@ -54,6 +55,7 @@ const i18n: I18nProps = {
   winnerText: "You're the winner",
   loserText: "You're the loser",
   waitingToPlay: "Waiting for host to start the game...",
+  playAgain: "Play Again?",
 };
 
 export default i18n;

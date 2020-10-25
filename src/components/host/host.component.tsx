@@ -5,6 +5,7 @@ import Scoreboard from "../scoreboard";
 import ShareLink from "../share-link";
 import { I18nProps } from "../../locales/en";
 import Button from "../button";
+import Link from "next/link";
 
 interface HostPanelProps {
   i18n: I18nProps;
@@ -28,7 +29,11 @@ const HostPanel: React.FC<HostPanelProps> = ({ i18n }) => {
     updateStatus(GameStatuses.FINISHED);
   };
 
-  console.log(gameId);
+  if (status === GameStatuses.FINISHED) {
+    <Link href="/create">
+      <a>{i18n.playAgain}</a>
+    </Link>;
+  }
 
   return (
     <>
