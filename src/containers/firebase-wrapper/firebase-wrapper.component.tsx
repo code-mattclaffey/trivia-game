@@ -93,7 +93,7 @@ const FirebaseWrapper: React.FC<{ gameId?: string }> = ({
     const newGameState = {
       ...defaultGameState,
       questions,
-      id,
+      gameId: id,
     };
 
     setGame(id, newGameState)

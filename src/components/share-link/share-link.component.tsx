@@ -26,9 +26,11 @@ const ShareLink: React.FC<ShareLinkProps> = ({ url, i18n }) => {
         })
         .catch(console.error);
     } else {
-      navigator.clipboard.writeText(url).then(() => {
-        setLinkCopied(true);
-      });
+      navigator.clipboard
+        .writeText(`${window.location.origin}${url}`)
+        .then(() => {
+          setLinkCopied(true);
+        });
     }
   };
 

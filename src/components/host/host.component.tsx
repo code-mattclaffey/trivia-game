@@ -28,6 +28,8 @@ const HostPanel: React.FC<HostPanelProps> = ({ i18n }) => {
     updateStatus(GameStatuses.FINISHED);
   };
 
+  console.log(gameId);
+
   return (
     <>
       <Scoreboard />
