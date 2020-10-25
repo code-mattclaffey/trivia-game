@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/host/*", "destination": "/host/[id].html" },
+    { "source": "/join/*", "destination": "/join/[id].html" },
+    { "source": "/quiz/*", "destination": "/quiz/[id].html" }
+  ]
+}
