@@ -154,7 +154,7 @@ const FirebaseWrapper: React.FC<{ gameId?: string }> = ({
 
     newGameState.players.push(player);
 
-    setGame(gameId!, newGameState)
+    updateGame(gameId!, { players: newGameState.players })
       .then(() => {
         updateState(newGameState);
         router.push(`/quiz/${gameId}`);
