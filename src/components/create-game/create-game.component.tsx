@@ -2,57 +2,20 @@ import React from "react";
 import { useFirebaseWrapper } from "../../containers/firebase-wrapper/firebase-wrapper.component";
 import { withTypes, Field } from "react-final-form";
 import { categories, difficulties, types } from "./form-values";
+import { I18nProps } from "../../locales/en";
+import { getQuestions } from "../../requests/trivia-api";
 
-const buildTrivaUrl = ({
-  amount,
-  difficulty = "any",
-  type = "any",
-  category = "any",
-  token,
-}: OpenTbdApi) => {
-  let apiUrl = `https://opentdb.com/api.php?amount=${amount}`;
+interface CreateGameProps {
+  i18n: I18nProps;
+}
 
-  if (!difficulty && difficulty !== "any") {
-    apiUrl += `&difficulty=${difficulty}`;
-  }
-
-  if (!type && type !== "any") {
-    apiUrl += `&type=${type}`;
-  }
-
-  if (!category && category !== "any") {
-    apiUrl += `&category=${category}`;
-  }
-
-  return `${apiUrl}&token=${token}`;
-};
-
-const CreateGame: React.FC = () => {
+const CreateGame: React.FC<CreateGameProps> = ({ i18n }) => {
   const { createGame } = useFirebaseWrapper();
 
-  const onSubmit = ({
-    amount = 10,
-    difficulty,
-    type,
-    category,
-  }: OpenTbdApi) => {
-    fetch("https://opentdb.com/api_token.php?command=request")
-      .then((res) => res.json())
-      .then(({ token }) => {
-        const apiUrl = buildTrivaUrl({
-          amount,
-          difficulty,
-          type,
-          category,
-          token,
-        });
+  const onSubmit = async (values: OpenTbdApi) => {
+    const { results } = await getQuestions(values);
 
-        fetch(apiUrl)
-          .then((response) => response.json())
-          .then(({ results }) => {
-            createGame(results);
-          });
-      });
+    createGame(results);
   };
 
   const { Form } = withTypes<OpenTbdApi>();
@@ -63,47 +26,37 @@ const CreateGame: React.FC = () => {
         return (
           <form onSubmit={handleSubmit}>
             <fieldset>
-              <legend>Create game</legend>
-              <label htmlFor="amount">Amount</label>
+              <legend>{i18n.createGameTitle}</legend>
+              <label htmlFor="amount">{i18n.amountLabel}</label>
               <Field
                 id="amount"
                 name="amount"
                 component="input"
                 type="text"
-                placeholder="Amount"
+                placeholder={i18n.amountPlaceholder}
               />
 
-              <label htmlFor="difficulty">Difficulty</label>
-              <Field
-                id="difficulty"
-                name="difficulty"
-                component="select"
-                placeholder="Amount"
-              >
+              <label htmlFor="difficulty">{i18n.difficultyLabel}</label>
+              <Field id="difficulty" name="difficulty" component="select">
                 {difficulties.map(({ label, value }) => (
                   <option value={value}>{label}</option>
                 ))}
               </Field>
 
-              <label htmlFor="category">Category</label>
-              <Field
-                id="category"
-                name="category"
-                component="select"
-                placeholder="Amount"
-              >
+              <label htmlFor="category">{i18n.categoryLabel}</label>
+              <Field id="category" name="category" component="select">
                 {categories.map(({ label, value }) => (
                   <option value={value}>{label}</option>
                 ))}
               </Field>
 
-              <label htmlFor="type">Type</label>
+              <label htmlFor="type">{i18n.typeLabel}</label>
               <Field id="type" name="type" component="select">
                 {types.map(({ label, value }) => (
                   <option value={value}>{label}</option>
                 ))}
               </Field>
-              <button type="submit">Play game</button>
+              <button type="submit">{i18n.playGameCta}</button>
             </fieldset>
           </form>
         );

@@ -8,6 +8,12 @@ export interface I18nProps {
   playerNameLabel: string;
   playerNamePlaceholder: string;
   playGameCta: string;
+  createGameTitle: string;
+  amountLabel: string;
+  amountPlaceholder: string;
+  difficultyLabel: string;
+  categoryLabel: string;
+  typeLabel: string;
 }
 
 const i18n: I18nProps = {
@@ -20,6 +26,12 @@ const i18n: I18nProps = {
   playerNameLabel: "Player name",
   playerNamePlaceholder: "Player name",
   playGameCta: "Play game",
+  createGameTitle: "Create game",
+  amountLabel: "Amount",
+  amountPlaceholder: "Amount",
+  difficultyLabel: "Difficulty",
+  categoryLabel: "Category",
+  typeLabel: "Type",
 };
 
 export default i18n;

@@ -1,18 +1,9 @@
-import React, { useEffect, useState } from "react";
-import firebase from "firebase/app";
-import "firebase/database";
-import firebaseConfig from "../containers/firebase-wrapper/config";
+import React from "react";
 import "../styles/global.css";
+import { useFirebase } from "../containers/firebase-wrapper";
 
 const App = ({ Component, pageProps }: any) => {
-  const [app, setFirebaseInstance] = useState<{ apps: Array<any> }>();
-
-  useEffect(() => {
-    if (!app?.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-      setFirebaseInstance(firebase);
-    }
-  }, [app]);
+  useFirebase();
 
   return <Component {...pageProps} />;
 };
