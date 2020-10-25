@@ -1,0 +1,10 @@
+{
+  "github": {
+    "enabled": false
+  },
+  "rewrites": [
+    { "source": "/host/:id", "destination": "/host/[id].html" },
+    { "source": "/quiz/:id", "destination": "/quiz/[id].html" },
+    { "source": "/join/:id", "destination": "/join/[id].html" }
+  ]
+}
