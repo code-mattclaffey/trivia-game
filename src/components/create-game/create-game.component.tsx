@@ -5,12 +5,26 @@ import { categories, difficulties, types } from "./form-values";
 
 const buildTrivaUrl = ({
   amount,
-  difficulty,
-  type,
-  category,
+  difficulty = "any",
+  type = "any",
+  category = "any",
   token,
 }: OpenTbdApi) => {
-  return `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=${type}&category=${category}&token=${token}`;
+  let apiUrl = `https://opentdb.com/api.php?amount=${amount}`;
+
+  if (!difficulty && difficulty !== "any") {
+    apiUrl += `&difficulty=${difficulty}`;
+  }
+
+  if (!type && type !== "any") {
+    apiUrl += `&type=${type}`;
+  }
+
+  if (!category && category !== "any") {
+    apiUrl += `&category=${category}`;
+  }
+
+  return `${apiUrl}&token=${token}`;
 };
 
 const CreateGame: React.FC = () => {
@@ -18,9 +32,9 @@ const CreateGame: React.FC = () => {
 
   const onSubmit = ({
     amount = 10,
-    difficulty = "any",
-    type = "any",
-    category = "any",
+    difficulty,
+    type,
+    category,
   }: OpenTbdApi) => {
     fetch("https://opentdb.com/api_token.php?command=request")
       .then((res) => res.json())

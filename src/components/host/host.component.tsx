@@ -31,9 +31,11 @@ const HostPanel: React.FC = () => {
       <Scoreboard />
       {status === GameStatuses.NOT_STARTED && (
         <>
-          <button onClick={() => onClick(`/join/${gameId}`)}>
-            Share link with friends
-          </button>
+          {navigator.share && (
+            <button onClick={() => onClick(`/join/${gameId}`)}>
+              Share link with friends
+            </button>
+          )}
           <button
             type="button"
             onClick={() => updateStatus(GameStatuses.IN_PLAY)}
