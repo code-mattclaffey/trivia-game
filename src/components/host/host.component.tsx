@@ -2,6 +2,7 @@ import React from "react";
 import { useFirebaseWrapper } from "../firebase-wrapper/firebase-wrapper.component";
 import { GameStatuses } from "../../types";
 import Scoreboard from "../scoreboard";
+import ShareLink from "../share-link";
 
 const HostPanel: React.FC = () => {
   const {
@@ -13,29 +14,12 @@ const HostPanel: React.FC = () => {
     gameId,
   } = useFirebaseWrapper();
 
-  const onClick = (url: string) => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: "Quiz time!",
-          url: url,
-        })
-        .catch(console.error);
-    } else {
-      // fallback
-    }
-  };
-
   return (
     <>
       <Scoreboard />
       {status === GameStatuses.NOT_STARTED && (
         <>
-          {navigator.share && (
-            <button onClick={() => onClick(`/join/${gameId}`)}>
-              Share link with friends
-            </button>
-          )}
+          <ShareLink url={`/join/${gameId}`} />
           <button
             type="button"
             onClick={() => updateStatus(GameStatuses.IN_PLAY)}
