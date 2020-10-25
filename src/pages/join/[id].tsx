@@ -1,4 +1,4 @@
-import Layout from "../../components/Layout";
+import Layout from "../../layouts/main/main.layout";
 import FirebaseWrapper from "../../containers/firebase-wrapper";
 import { useRouter } from "next/router";
 import JoinGame from "../../components/join-game";
@@ -11,7 +11,7 @@ const IndexPage: React.FC = () => {
 
   return (
     <FirebaseWrapper gameId={gameId}>
-      <Layout title="Join game">
+      <Layout title={i18n.pageTitles.join}>
         <JoinGame i18n={i18n} />
       </Layout>
     </FirebaseWrapper>

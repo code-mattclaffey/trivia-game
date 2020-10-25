@@ -15,6 +15,13 @@ export interface I18nProps {
   difficultyLabel: string;
   categoryLabel: string;
   typeLabel: string;
+  pageTitles: {
+    host: string;
+    create: string;
+    join: string;
+    quiz: string;
+    home: string;
+  };
 }
 
 const i18n: I18nProps = {
@@ -34,6 +41,13 @@ const i18n: I18nProps = {
   difficultyLabel: "Difficulty",
   categoryLabel: "Category",
   typeLabel: "Type",
+  pageTitles: {
+    host: "Trivia - Quiz Host",
+    create: "Trivia - Create Game",
+    join: "Trivia - Join Game",
+    quiz: "Trivia - Quiz",
+    home: "Trivia - Quiz Game",
+  },
 };
 
 export default i18n;

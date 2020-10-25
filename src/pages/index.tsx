@@ -1,11 +1,12 @@
-import Layout from "../components/Layout";
+import Layout from "../layouts/main/main.layout";
 import Link from "next/link";
+import { i18n } from "../locales";
 
 const IndexPage = () => (
-  <Layout title="Home | Next.js + TypeScript Example">
-    <h1>Hello Next.js 👋</h1>
+  <Layout title={i18n.pageTitles.home}>
+    <h1>👋 Trivia</h1>
     <Link href="/create">
-      <a>Play</a>
+      <a>Create a game</a>
     </Link>
   </Layout>
 );

@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "../../components/Layout";
+import Layout from "../../layouts/main/main.layout";
 import FirebaseWrapper from "../../containers/firebase-wrapper";
 import { useRouter } from "next/router";
 import HostPanel from "../../components/host";
@@ -12,8 +12,7 @@ const IndexPage: React.FC = () => {
 
   return (
     <FirebaseWrapper gameId={gameId}>
-      <Layout title="Host">
-        <h1>Host</h1>
+      <Layout title={i18n.pageTitles.host}>
         <HostPanel i18n={i18n} />
       </Layout>
     </FirebaseWrapper>
