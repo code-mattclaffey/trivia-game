@@ -40,6 +40,7 @@ const FirebaseWrapper: React.FC<{ gameId?: string }> = ({
   children,
   gameId,
 }) => {
+  const KEY = "trivia-state";
   const router = useRouter();
   const [data, setData] = useState<Game>(defaultGameState);
 
@@ -57,11 +58,29 @@ const FirebaseWrapper: React.FC<{ gameId?: string }> = ({
         .database()
         .ref(gameId)
         .on("value", (snapshot) => {
-          setData(snapshot.val());
-          localStorage.setItem("trivia-state", JSON.stringify(snapshot.val()));
+          updateState(snapshot.val());
         });
     }
   }, [gameId]);
+
+  const getGameRef = (id: string) => {
+    return firebase.database().ref(id);
+  };
+
+  const updateGame = (id: string, state: Partial<Game>) => {
+    return getGameRef(id).update({ ...state });
+  };
+
+  const setGame = (id: string, state: Partial<Game>) => {
+    return getGameRef(id).set({ ...state });
+  };
+
+  const updateState = (state: Game) => {
+    setData(state);
+    localStorage.setItem(KEY, JSON.stringify(state));
+  };
+
+  const logError = (error: Error) => console.error(error);
 
   const createGame = (questions: Array<Question>) => {
     const id = uuidv4();
@@ -72,56 +91,37 @@ const FirebaseWrapper: React.FC<{ gameId?: string }> = ({
       id,
     };
 
-    firebase
-      .database()
-      .ref(id)
-      .set(newGameState)
+    setGame(id, newGameState)
       .then(() => {
-        setData(newGameState);
-        localStorage.setItem("trivia-state", JSON.stringify(newGameState));
+        updateState(newGameState);
         router.push(`/host/${id}`);
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(logError);
   };
 
   const updateStatus = (status: keyof typeof GameStatuses) => {
-    firebase
-      .database()
-      .ref(gameId)
-      .update({ status })
+    updateGame(gameId!, { status })
       .then(() => {
-        const newGameState: Game = {
+        updateState({
           ...data,
           status,
-        };
-
-        setData(newGameState);
-        localStorage.setItem("trivia-state", JSON.stringify(newGameState));
+        });
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(logError);
   };
 
   const nextQuestion = () => {
-    firebase
-      .database()
-      .ref(gameId)
-      .update({ questionStage: data.questionStage + 1 })
-      .then(() => {
-        const newGameState: Game = {
-          ...data,
-          questionStage: data.questionStage + 1,
-        };
+    const newGameState: Game = {
+      ...data,
+      questionStage: data.questionStage + 1,
+    };
 
+    updateGame(gameId!, { questionStage: newGameState.questionStage })
+      .then(() => {
         setData(newGameState);
         localStorage.setItem("trivia-state", JSON.stringify(newGameState));
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(logError);
   };
 
   const updatePlayerScore = (player: Player) => {
@@ -135,50 +135,34 @@ const FirebaseWrapper: React.FC<{ gameId?: string }> = ({
       return currentPlayer;
     });
 
-    firebase
-      .database()
-      .ref(gameId)
-      .update({ players })
+    updateGame(gameId!, { players })
       .then(() => {
-        const newGameState: Game = {
+        updateState({
           ...data,
           players,
-        };
-
-        setData(newGameState);
-        localStorage.setItem("trivia-state", JSON.stringify(newGameState));
+        });
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(logError);
   };
 
   const addPlayer = (player: Player) => {
-    const oldState = data;
-
     const newGameState = {
-      ...oldState,
+      ...data,
     };
 
     newGameState.players = newGameState.players || [];
 
     newGameState.players.push(player);
 
-    firebase
-      .database()
-      .ref(gameId)
-      .set(newGameState)
+    setGame(gameId!, newGameState)
       .then(() => {
-        setData(newGameState);
-        localStorage.setItem("trivia-state", JSON.stringify(newGameState));
+        updateState(newGameState);
         router.push(`/quiz/${gameId}`);
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(logError);
   };
 
-  const context = {
+  const context: FirebaseWrapperContextProps = {
     ...data,
     createGame,
     addPlayer,
