@@ -58,7 +58,12 @@ const FirebaseWrapper: React.FC<{ gameId?: string }> = ({
   useEffect(() => {
     if (gameId !== undefined) {
       getGameRef(gameId).on("value", (snapshot) => {
-        updateState(snapshot.val());
+        if (snapshot.exists()) {
+          updateState(snapshot.val());
+          return;
+        }
+
+        router.push("/");
       });
     }
   }, [gameId]);
