@@ -1,15 +1,21 @@
 import React from "react";
+import { I18nProps } from "../../locales/en";
+import Button from "../button";
 
 interface ShareLinkProps {
   url: string;
+  i18n: {
+    shareLinkTitle: I18nProps["shareLinkTitle"];
+    shareLinkText: I18nProps["shareLinkText"];
+  };
 }
 
-const ShareLink: React.FC<ShareLinkProps> = ({ url }) => {
+const ShareLink: React.FC<ShareLinkProps> = ({ url, i18n }) => {
   const onClick = () => {
     if (navigator.share) {
       navigator
         .share({
-          title: "Quiz time!",
+          title: i18n.shareLinkTitle,
           url: url,
         })
         .catch(console.error);
@@ -19,7 +25,7 @@ const ShareLink: React.FC<ShareLinkProps> = ({ url }) => {
   return (
     <>
       {navigator.share && (
-        <button onClick={onClick}>Share link with friends</button>
+        <Button onClick={onClick}>{i18n.shareLinkText}</Button>
       )}
     </>
   );

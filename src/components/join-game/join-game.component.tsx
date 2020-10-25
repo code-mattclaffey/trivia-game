@@ -2,6 +2,7 @@ import React from "react";
 import { useFirebaseWrapper } from "../firebase-wrapper/firebase-wrapper.component";
 import { withTypes, Field } from "react-final-form";
 import { v4 as uuidv4 } from "uuid";
+import Button from "../button";
 
 const JoinGame: React.FC = () => {
   const { addPlayer } = useFirebaseWrapper();
@@ -55,7 +56,7 @@ const JoinGame: React.FC = () => {
                 type="text"
                 placeholder="Player name"
               />
-              <button type="submit">Play game</button>
+              <Button type="submit">Play game</Button>
             </fieldset>
           </form>
         );

@@ -3,6 +3,7 @@ import ReactHtmlParser from "react-html-parser";
 import { useFirebaseWrapper } from "../firebase-wrapper/firebase-wrapper.component";
 import { GameStatuses } from "../../types";
 import Scoreboard from "../scoreboard";
+import Button from "../button";
 
 const Quiz: React.FC = () => {
   const [playerId, setPlayerId] = useState<string>();
@@ -82,14 +83,13 @@ const Quiz: React.FC = () => {
     <>
       <h1>{ReactHtmlParser(question.question)}</h1>
       {answers.map((answer: string) => (
-        <button
-          type="button"
+        <Button
           key={answer}
           onClick={() => answerQuestion(answer)}
           disabled={disabledAnswers}
         >
           {answer}
-        </button>
+        </Button>
       ))}
     </>
   );
