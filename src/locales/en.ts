@@ -1,6 +1,7 @@
 export interface I18nProps {
   shareLinkTitle: string;
   shareLinkText: string;
+  shareLinkCopiedText: string;
   showWinnerCta: string;
   startGameCta: string;
   nextQuestionCta: string;
@@ -19,6 +20,7 @@ export interface I18nProps {
 const i18n: I18nProps = {
   shareLinkTitle: "Quiz Night",
   shareLinkText: "Share link with friends",
+  shareLinkCopiedText: "Link copied",
   showWinnerCta: "Show winner",
   startGameCta: "Start game",
   nextQuestionCta: "Next question",

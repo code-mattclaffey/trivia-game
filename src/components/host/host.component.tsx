@@ -38,6 +38,7 @@ const HostPanel: React.FC<HostPanelProps> = ({ i18n }) => {
             i18n={{
               shareLinkText: i18n.shareLinkText,
               shareLinkTitle: i18n.shareLinkTitle,
+              shareLinkCopiedText: i18n.shareLinkCopiedText,
             }}
           />
           <Button onClick={startGame}>{i18n.startGameCta}</Button>
