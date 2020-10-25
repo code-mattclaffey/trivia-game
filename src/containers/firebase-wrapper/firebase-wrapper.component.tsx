@@ -15,8 +15,7 @@ interface FirebaseWrapperContextProps extends Game {
 
 export const defaultGameState: Game = {
   gameId: null,
-  status: "NOT_STARTED",
-  currentQuestionId: "",
+  status: GameStatuses.NOT_STARTED,
   questionStage: 0,
   questions: [],
   players: [],

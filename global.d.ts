@@ -31,8 +31,7 @@ interface OpenTbdApiResponse {
 interface Game {
   gameId: string | null;
   status: "NOT_STARTED" | "IN_PLAY" | "FINISHED";
-  currentQuestionId: string;
-  questionStage: number; // to determine which question the user is on
+  questionStage: number;
   questions: Array<Question>;
   players?: Array<Player>;
 }
