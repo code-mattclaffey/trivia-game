@@ -21,9 +21,9 @@ const JoinGame: React.FC<JoinGameProps> = ({ i18n }) => {
   if (status !== GameStatuses.NOT_STARTED) {
     return (
       <Card>
-        <h1 className="quiz__title">Game has already started</h1>
+        <h1 className="quiz__title">{i18n.gameHasStartedTitle}</h1>
         <Link href="/create">
-          <Button element="a">Create your own game</Button>
+          <Button element="a">{i18n.gameHasStartedCtaText}</Button>
         </Link>
       </Card>
     );

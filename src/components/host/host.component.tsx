@@ -34,8 +34,7 @@ const HostPanel: React.FC<HostPanelProps> = ({ i18n }) => {
 
   if (status === GameStatuses.FINISHED) {
     return (
-      <Card>
-        <h1 className="quiz__title">Would you like to play again?</h1>
+      <Card title={i18n.wouldYouLikeToPlayAgainTitle}>
         <Link href="/create">
           <Button element="a">{i18n.playAgain}</Button>
         </Link>
@@ -43,55 +42,68 @@ const HostPanel: React.FC<HostPanelProps> = ({ i18n }) => {
     );
   }
 
+  let title: any = i18n.invitePlayersTitle;
+  let Component: JSX.Element | null = null;
+
+  if (questionStage === questions.length - 1) {
+    title = i18n.showWinnerTitle;
+
+    Component = (
+      <Card title={title}>
+        <Button onClick={showWinner}>{i18n.showWinnerCta}</Button>
+      </Card>
+    );
+  }
+
+  if (status === GameStatuses.NOT_STARTED) {
+    title = i18n.invitePlayersTitle;
+
+    if (players && players.length > 0) {
+      title = i18n.readyToPlayTitle;
+    }
+
+    Component = (
+      <Card title={title}>
+        <>
+          <ShareLink
+            url={`/join/${gameId}`}
+            i18n={{
+              shareLinkText: i18n.shareLinkText,
+              shareLinkTitle: i18n.shareLinkTitle,
+              shareLinkCopiedText: i18n.shareLinkCopiedText,
+            }}
+          />
+          {players && players.length > 0 && (
+            <Button onClick={startGame}>{i18n.startGameCta}</Button>
+          )}
+        </>
+      </Card>
+    );
+  }
+
+  if (status === GameStatuses.NOT_STARTED && players && players?.length > 0) {
+    title = i18n.readyToPlayTitle;
+  }
+
+  if (
+    questionStage !== questions.length - 1 &&
+    status === GameStatuses.IN_PLAY
+  ) {
+    title = ReactHtmlParser(questions[questionStage].question);
+
+    Component = (
+      <Card title={title}>
+        <Button onClick={nextQuestion} variant="alt-black">
+          {i18n.nextQuestionCta}
+        </Button>
+      </Card>
+    );
+  }
+
   return (
     <>
-      <div className="card">
-        <h1 className="quiz__title">
-          {status === GameStatuses.NOT_STARTED && !players && (
-            <>Now let's start inviting players</>
-          )}
-          {status === GameStatuses.NOT_STARTED &&
-            players &&
-            players?.length > 0 && <>Ready to play?</>}
-        </h1>
-        {status === GameStatuses.NOT_STARTED && (
-          <>
-            <ShareLink
-              url={`/join/${gameId}`}
-              i18n={{
-                shareLinkText: i18n.shareLinkText,
-                shareLinkTitle: i18n.shareLinkTitle,
-                shareLinkCopiedText: i18n.shareLinkCopiedText,
-              }}
-            />
-            {players && players.length > 0 && (
-              <Button onClick={startGame}>{i18n.startGameCta}</Button>
-            )}
-          </>
-        )}
-        {questionStage !== questions.length - 1 &&
-          status === GameStatuses.IN_PLAY && (
-            <>
-              <h1 className="quiz__title">
-                {ReactHtmlParser(questions[questionStage].question)}
-              </h1>
-
-              <Button onClick={nextQuestion} variant="alt-black">
-                {i18n.nextQuestionCta}
-              </Button>
-            </>
-          )}
-        {questionStage === questions.length - 1 && (
-          <>
-            <h1 className="quiz__title">It's time for the big reveal! 🥁 🥁</h1>
-            <Button onClick={showWinner}>{i18n.showWinnerCta}</Button>
-          </>
-        )}
-      </div>
-
-      <div className="card">
-        <Scoreboard />
-      </div>
+      {Component}
+      <Scoreboard title={i18n.playersJoined} />
     </>
   );
 };

@@ -26,6 +26,14 @@ export interface I18nProps {
   loserText: string;
   waitingToPlay: string;
   playAgain: string;
+  scoreboardTitle: string;
+  gameHasStartedTitle: string;
+  gameHasStartedCtaText: string;
+  invitePlayersTitle: string;
+  readyToPlayTitle: string;
+  wouldYouLikeToPlayAgainTitle: string;
+  showWinnerTitle: string;
+  playersJoined: string;
 }
 
 const i18n: I18nProps = {
@@ -56,6 +64,14 @@ const i18n: I18nProps = {
   loserText: "You're the loser 😢",
   waitingToPlay: "Waiting for host to start the game...",
   playAgain: "Play Again?",
+  scoreboardTitle: "Players joined",
+  gameHasStartedTitle: "Game has already started",
+  gameHasStartedCtaText: "Create your own game",
+  invitePlayersTitle: "Now let's start inviting players",
+  readyToPlayTitle: "Ready to play?",
+  wouldYouLikeToPlayAgainTitle: "Would you like to play again?",
+  showWinnerTitle: "It's time for the big reveal! 🥁 🥁",
+  playersJoined: "Players joined",
 };
 
 export default i18n;
