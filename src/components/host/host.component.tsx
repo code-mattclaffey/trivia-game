@@ -19,6 +19,7 @@ const HostPanel: React.FC<HostPanelProps> = ({ i18n }) => {
     questionStage,
     status,
     gameId,
+    players,
   } = useFirebaseWrapper();
 
   const startGame = () => {
@@ -37,27 +38,34 @@ const HostPanel: React.FC<HostPanelProps> = ({ i18n }) => {
 
   return (
     <>
-      <Scoreboard />
-      {status === GameStatuses.NOT_STARTED && (
-        <>
-          <ShareLink
-            url={`/join/${gameId}`}
-            i18n={{
-              shareLinkText: i18n.shareLinkText,
-              shareLinkTitle: i18n.shareLinkTitle,
-              shareLinkCopiedText: i18n.shareLinkCopiedText,
-            }}
-          />
-          <Button onClick={startGame}>{i18n.startGameCta}</Button>
-        </>
-      )}
-      {questionStage !== questions.length - 1 &&
-        status === GameStatuses.IN_PLAY && (
-          <Button onClick={nextQuestion}>{i18n.nextQuestionCta}</Button>
+      <div className="card">
+        {status === GameStatuses.NOT_STARTED && (
+          <>
+            <ShareLink
+              url={`/join/${gameId}`}
+              i18n={{
+                shareLinkText: i18n.shareLinkText,
+                shareLinkTitle: i18n.shareLinkTitle,
+                shareLinkCopiedText: i18n.shareLinkCopiedText,
+              }}
+            />
+            {players && players.length > 0 && (
+              <Button onClick={startGame}>{i18n.startGameCta}</Button>
+            )}
+          </>
         )}
-      {questionStage === questions.length - 1 && (
-        <Button onClick={showWinner}>{i18n.showWinnerCta}</Button>
-      )}
+        {questionStage !== questions.length - 1 &&
+          status === GameStatuses.IN_PLAY && (
+            <Button onClick={nextQuestion}>{i18n.nextQuestionCta}</Button>
+          )}
+        {questionStage === questions.length - 1 && (
+          <Button onClick={showWinner}>{i18n.showWinnerCta}</Button>
+        )}
+      </div>
+
+      <div className="card">
+        <Scoreboard />
+      </div>
     </>
   );
 };

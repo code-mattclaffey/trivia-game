@@ -67,7 +67,11 @@ const Quiz: React.FC = () => {
   };
 
   if (status === GameStatuses.NOT_STARTED) {
-    return <p>{i18n.waitingToPlay}</p>;
+    return (
+      <div className="card">
+        <p>{i18n.waitingToPlay}</p>
+      </div>
+    );
   }
 
   if (status === GameStatuses.FINISHED) {
@@ -93,7 +97,7 @@ const Quiz: React.FC = () => {
   }
 
   return (
-    <>
+    <div className="card">
       <h1>{ReactHtmlParser(question.question)}</h1>
       {answers.map((answer: string) => (
         <Button
@@ -104,7 +108,7 @@ const Quiz: React.FC = () => {
           {answer}
         </Button>
       ))}
-    </>
+    </div>
   );
 };
 

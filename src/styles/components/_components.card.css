@@ -1,0 +1,35 @@
+:root {
+  --card-bg: var(--color-white);
+  --card-text-color: var(--color-body);
+}
+
+.card {
+  background-color: var(--card-bg);
+  border-radius: 30px;
+  color: var(--card-text-color);
+  padding: 40px 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.card + .card {
+  margin-top: 60px;
+}
+
+.card::before,
+.card::after {
+  background-color: var(--card-bg);
+  border-radius: 30px;
+  content: "";
+  left: 0;
+  position: absolute;
+  top: -20px;
+  height: 100%;
+  opacity: 0.8;
+  width: 100%;
+  z-index: -1;
+}
+
+.card::after {
+  top: -35px;
+}

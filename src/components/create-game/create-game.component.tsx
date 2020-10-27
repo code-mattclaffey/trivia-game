@@ -24,7 +24,7 @@ const CreateGame: React.FC<CreateGameProps> = ({ i18n }) => {
     <Form onSubmit={onSubmit} initialValues={{ amount: 10 }}>
       {({ handleSubmit }) => {
         return (
-          <form onSubmit={handleSubmit}>
+          <form className="card" onSubmit={handleSubmit}>
             <fieldset>
               <legend>{i18n.createGameTitle}</legend>
               <label htmlFor="amount">{i18n.amountLabel}</label>

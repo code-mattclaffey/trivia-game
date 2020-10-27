@@ -31,7 +31,7 @@ const JoinGame: React.FC<JoinGameProps> = ({ i18n }) => {
     >
       {({ handleSubmit }) => {
         return (
-          <form onSubmit={handleSubmit}>
+          <form className="card" onSubmit={handleSubmit}>
             <fieldset>
               <legend>{i18n.joinGameTitle}</legend>
               <Field
