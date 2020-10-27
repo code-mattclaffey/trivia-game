@@ -34,3 +34,7 @@ yarn-error.log*
 .vercel
 .next
 .env
+
+sw.js
+sw.js.map
+workbox-*
