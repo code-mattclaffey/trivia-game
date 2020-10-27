@@ -6,7 +6,7 @@ interface ButtonProps {
   type?: "button" | "submit" | "reset" | undefined;
   onClick?: () => void;
   disabled?: boolean;
-  variant?: "alt";
+  variant?: "alt" | "alt-black";
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -21,7 +21,11 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <HtmlEl
-      className={classNames("button", variant === "alt" && "button--alt")}
+      className={classNames(
+        "button",
+        variant === "alt" && "button--alt",
+        variant === "alt-black" && "button--alt-black"
+      )}
       onClick={onClick}
       disabled={disabled}
       {...props}

@@ -1,10 +1,12 @@
 import React from "react";
 import { useFirebaseWrapper } from "../../containers/firebase-wrapper/firebase-wrapper.component";
-import { withTypes, Field } from "react-final-form";
+import { withTypes } from "react-final-form";
 import { categories, difficulties, types } from "./form-values";
 import { I18nProps } from "../../locales/en";
 import { getQuestions } from "../../requests/trivia-api";
-import Button from "../button";
+import FieldRow from "../field";
+import FormContainer from "../form";
+import Card from "../card";
 
 interface CreateGameProps {
   i18n: I18nProps;
@@ -25,49 +27,42 @@ const CreateGame: React.FC<CreateGameProps> = ({ i18n }) => {
     <Form onSubmit={onSubmit} initialValues={{ amount: 10 }}>
       {({ handleSubmit }) => {
         return (
-          <form className="card" onSubmit={handleSubmit}>
-            <fieldset>
-              <legend>{i18n.createGameTitle}</legend>
-              <div>
-                <label htmlFor="amount">{i18n.amountLabel}</label>
-                <Field
-                  id="amount"
-                  name="amount"
-                  component="input"
-                  type="text"
-                  placeholder={i18n.amountPlaceholder}
-                />
-              </div>
-              <div>
-                <label htmlFor="difficulty">{i18n.difficultyLabel}</label>
-                <Field id="difficulty" name="difficulty" component="select">
-                  {difficulties.map(({ label, value }) => (
-                    <option value={value}>{label}</option>
-                  ))}
-                </Field>
-              </div>
+          <Card>
+            <FormContainer
+              title={i18n.createGameTitle}
+              onSubmit={handleSubmit}
+              submitText={i18n.playGameCta}
+            >
+              <FieldRow
+                label={i18n.amountLabel}
+                id="amount"
+                component="input"
+                type="text"
+                placeholder={i18n.amountPlaceholder}
+              />
 
-              <div>
-                <label htmlFor="category">{i18n.categoryLabel}</label>
-                <Field id="category" name="category" component="select">
-                  {categories.map(({ label, value }) => (
-                    <option value={value}>{label}</option>
-                  ))}
-                </Field>
-              </div>
+              <FieldRow
+                label={i18n.difficultyLabel}
+                id="difficulty"
+                component="select"
+                options={difficulties}
+              />
 
-              <div>
-                <label htmlFor="type">{i18n.typeLabel}</label>
-                <Field id="type" name="type" component="select">
-                  {types.map(({ label, value }) => (
-                    <option value={value}>{label}</option>
-                  ))}
-                </Field>
-              </div>
+              <FieldRow
+                label={i18n.categoryLabel}
+                id="category"
+                component="select"
+                options={categories}
+              />
 
-              <Button type="submit">{i18n.playGameCta}</Button>
-            </fieldset>
-          </form>
+              <FieldRow
+                label={i18n.typeLabel}
+                id="type"
+                component="select"
+                options={types}
+              />
+            </FormContainer>
+          </Card>
         );
       }}
     </Form>

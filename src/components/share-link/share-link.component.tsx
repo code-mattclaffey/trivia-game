@@ -36,8 +36,10 @@ const ShareLink: React.FC<ShareLinkProps> = ({ url, i18n }) => {
 
   return (
     <>
-      <Button onClick={onClick}>{i18n.shareLinkText}</Button>
-      {linkCopied && <p>{i18n.shareLinkCopiedText}</p>}
+      <Button onClick={onClick} variant="alt-black">
+        {!linkCopied && i18n.shareLinkText}
+        {linkCopied && i18n.shareLinkCopiedText}
+      </Button>
     </>
   );
 };

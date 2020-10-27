@@ -1,0 +1,46 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+}
+
+@media screen and (max-width: 639px) {
+  html {
+    background: #06065b url("/quiz-bg-mobile.png") no-repeat center/cover;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  html {
+    background: #06065b url("/quiz-bg.png") no-repeat center/cover;
+  }
+}
+
+html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#__next {
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  padding: 80px 20px;
+  text-align: center;
+  width: 870px;
+}
+
+@media screen and (max-width: 870px) {
+  #__next {
+    max-width: 640px;
+    width: 100%;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}

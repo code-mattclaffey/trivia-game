@@ -5,6 +5,7 @@ import { GameStatuses } from "../../types";
 import Button from "../button";
 import Giphy from "../giphy";
 import { i18n } from "../../locales";
+import Card from "../card";
 
 const Quiz: React.FC = () => {
   const [playerId, setPlayerId] = useState<string>();
@@ -97,18 +98,22 @@ const Quiz: React.FC = () => {
   }
 
   return (
-    <div className="card">
-      <h1>{ReactHtmlParser(question.question)}</h1>
-      {answers.map((answer: string) => (
-        <Button
-          key={answer}
-          onClick={() => answerQuestion(answer)}
-          disabled={disabledAnswers}
-        >
-          {answer}
-        </Button>
-      ))}
-    </div>
+    <Card>
+      <h1 className="quiz__title">{ReactHtmlParser(question.question)}</h1>
+      <ul className="quiz__answers">
+        {answers.map((answer: string) => (
+          <li key={answer}>
+            <Button
+              onClick={() => answerQuestion(answer)}
+              disabled={disabledAnswers}
+              variant="alt-black"
+            >
+              {ReactHtmlParser(answer)}
+            </Button>
+          </li>
+        ))}
+      </ul>
+    </Card>
   );
 };
 

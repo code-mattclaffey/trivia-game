@@ -5,7 +5,7 @@ import Button from "../components/button";
 
 const IndexPage = () => (
   <Layout title={i18n.pageTitles.home}>
-    <h1>🥳 Quiz Night 🥳</h1>
+    <h1 className="text-color--white">🥳 Quiz Night 🥳</h1>
     <Link href="/create">
       <Button element="a" variant="alt">
         Start

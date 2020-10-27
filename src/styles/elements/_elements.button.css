@@ -8,18 +8,49 @@
   border-radius: 30px;
   color: var(--button-text-color);
   cursor: pointer;
+  display: block;
   letter-spacing: 1px;
   padding: 0;
   position: relative;
   min-width: 220px;
   margin: 0 auto;
   max-width: 300px;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
   z-index: 2;
+}
+
+.button + .button {
+  margin-top: 20px;
+}
+
+@media screen and (min-width: 640px) {
+  .button {
+    display: inline-block;
+  }
+
+  .button + .button {
+    margin-top: 0;
+    margin-left: 20px;
+  }
 }
 
 .button--alt {
   --button-border-color: var(--color-white);
   --button-bg-color: transparent;
+}
+
+.button--alt-black {
+  --button-border-color: rgba(111, 99, 242, 0.1);
+  --button-bg-color: rgba(111, 99, 242, 0.1);
+  --button-text-color: var(--color-body);
+}
+
+.button[disabled],
+.button--alt[disabled],
+.button--alt-black[disabled] {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .button:hover,
@@ -46,12 +77,21 @@
 .button__content {
   border-radius: 30px;
   display: block;
-  padding: 10px 20px;
+  padding: 15px 20px;
 }
 
 .button:focus .button__content,
 .button:hover .button__content {
   background: rgba(255, 255, 255, 0.1);
-  text-shadow: 1px 0 0 var(--color-body);
   text-decoration: none;
+}
+
+.button--alt-black:focus,
+.button--alt-black:hover {
+  background: rgba(111, 99, 242, 0.3);
+}
+
+.button--alt:focus .button__content,
+.button--alt:hover .button__content {
+  text-shadow: 1px 0 0 var(--color-body);
 }

@@ -52,8 +52,8 @@ const i18n: I18nProps = {
     quiz: "Trivia - Quiz",
     home: "Trivia - Quiz Game",
   },
-  winnerText: "You're the winner",
-  loserText: "You're the loser",
+  winnerText: "You're the winner 🎉 🎉",
+  loserText: "You're the loser 😢",
   waitingToPlay: "Waiting for host to start the game...",
   playAgain: "Play Again?",
 };

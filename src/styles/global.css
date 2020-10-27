@@ -1,86 +1,13 @@
 @import "./settings/_settings.variables.css";
 @import "reset.css";
 @import "normalize.css";
+@import "./utils/_utils.colors.css";
+@import "./generic/_generic.page.css";
+@import "./elements/_elements.button.css";
+@import "./elements/_elements.text.css";
+@import "./elements/_elements.image.css";
 @import "./components/_components.card.css";
-@import "./components/_components.button.css";
-
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: "Fredoka One", cursive;
-  line-height: 1.4;
-  font-size: 18px;
-  height: 100%;
-}
-
-@media screen and (max-width: 639px) {
-  html,
-  body {
-    background: #06065b url("/quiz-bg-mobile.png") no-repeat center/cover;
-  }
-}
-
-@media screen and (min-width: 640px) {
-  html,
-  body {
-    background: #06065b url("/quiz-bg.png") no-repeat center/cover;
-  }
-}
-
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-body > #__next {
-  max-width: 870px;
-  width: 100%;
-  margin: 0 auto;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-  padding: 0 20px;
-  text-align: center;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-ul,
-ol {
-  color: var(--color-white);
-}
-
-h1 {
-  font-size: 3em;
-}
-
-h2,
-legend {
-  font-size: 2em;
-}
-
-a {
-  color: white;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-img {
-  max-width: 100%;
-  display: block;
-}
+@import "./components/_components.field.css";
+@import "./components/_components.form.css";
+@import "./components/_components.quiz.css";
+@import "./components/_components.scoreboard.css";

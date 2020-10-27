@@ -27,7 +27,12 @@ const Giphy: React.FC<GiphyProps> = ({ isWinner, i18n }) => {
   if (giphyUrl) {
     const winnerText = isWinner ? i18n.winnerText : i18n.loserText;
 
-    return <img src={giphyUrl} alt={winnerText} />;
+    return (
+      <>
+        <h1 className="text-color--white">{winnerText}</h1>
+        <img src={giphyUrl} alt={winnerText} />
+      </>
+    );
   }
 
   return null;

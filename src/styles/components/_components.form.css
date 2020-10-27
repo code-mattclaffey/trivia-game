@@ -1,0 +1,12 @@
+.form__section {
+  padding: 0;
+}
+
+.form__title {
+  font-size: 2em;
+  margin-bottom: 30px;
+}
+
+.form__footer {
+  margin-top: 20px;
+}
