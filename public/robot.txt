@@ -1,0 +1,8 @@
+
+User-agent: *
+Allow: /
+
+Disallow: /host/*
+Disallow: /join/*
+Disallow: /create
+Disallow: /quiz/*
