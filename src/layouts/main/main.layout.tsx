@@ -23,6 +23,12 @@ const Layout = ({ children, title }: Props) => {
           async
         />
         <link
+          rel="preload"
+          href="/quiz-bg-mobile.png"
+          media="(max-width: 639px)"
+        />
+        <link rel="preload" href="/quiz-bg.png" media="(min-width: 640px)" />
+        <link
           href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
           rel="stylesheet"
           media="print"
