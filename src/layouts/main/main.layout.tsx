@@ -14,6 +14,10 @@ const Layout = ({ children, title }: Props) => {
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <script src="https://polyfill.io/v3/polyfill.min.js?features=Array.prototype.filter%2CArray.prototype.forEach%2CArray.prototype.map%2CPromise%2Ces2017" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       {children}
     </>
