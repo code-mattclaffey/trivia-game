@@ -1,9 +1,3 @@
-.scoreboard__title {
-  font-size: 1.2em;
-  margin-bottom: 20px;
-  text-align: left;
-}
-
 .scoreboard__player {
   align-items: flex-start;
   border-bottom: 1px solid rgba(111, 99, 242, 0.3);

@@ -20,8 +20,7 @@ const JoinGame: React.FC<JoinGameProps> = ({ i18n }) => {
 
   if (status !== GameStatuses.NOT_STARTED) {
     return (
-      <Card>
-        <h1 className="quiz__title">{i18n.gameHasStartedTitle}</h1>
+      <Card title={i18n.gameHasStartedTitle}>
         <Link href="/create">
           <Button element="a">{i18n.gameHasStartedCtaText}</Button>
         </Link>

@@ -5,15 +5,22 @@ body {
   min-height: 100%;
 }
 
+html {
+  --page-bg: transparent;
+  background: var(--page-bg);
+}
+
 @media screen and (max-width: 639px) {
   html {
-    background: #06065b url("/quiz-bg-mobile.png") no-repeat center/cover;
+    --page-bg: var(--color-darker-blue) url("/quiz-bg-mobile.png") no-repeat
+      center/cover;
   }
 }
 
 @media screen and (min-width: 640px) {
   html {
-    background: #06065b url("/quiz-bg.png") no-repeat center/cover;
+    --page-bg: var(--color-darker-blue) url("/quiz-bg.png") no-repeat
+      center/cover;
   }
 }
 

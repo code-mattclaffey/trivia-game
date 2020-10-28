@@ -98,8 +98,7 @@ const Quiz: React.FC = () => {
   }
 
   return (
-    <Card>
-      <h1 className="quiz__title">{ReactHtmlParser(question.question)}</h1>
+    <Card title={ReactHtmlParser(question.question)}>
       <ul className="quiz__answers">
         {answers.map((answer: string) => (
           <li key={answer}>
