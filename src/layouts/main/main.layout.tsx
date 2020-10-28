@@ -10,7 +10,6 @@ const Layout = ({ children, title }: Props) => {
   return (
     <>
       <Head>
-        <html lang="en" />
         <title>{title}</title>
         <meta
           name="description"
