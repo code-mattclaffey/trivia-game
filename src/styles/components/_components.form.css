@@ -1,3 +1,7 @@
+.form {
+  display: inline-block;
+}
+
 .form__section {
   padding: 0;
 }
